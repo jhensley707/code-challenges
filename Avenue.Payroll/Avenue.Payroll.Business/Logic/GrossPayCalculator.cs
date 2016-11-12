@@ -16,7 +16,7 @@ namespace Avenue.Payroll.Business.Logic
         /// <returns>Gross pay</returns>
         public decimal CalculateGrossPay(decimal hoursWorked, decimal hourlyRate)
         {
-            return 0M;
+            return hoursWorked * hourlyRate;
         }
     }
 }
