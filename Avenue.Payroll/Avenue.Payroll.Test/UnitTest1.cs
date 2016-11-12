@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Avenue.Payroll.Business.Logic;
+using Should;
 
 namespace Avenue.Payroll.Test
 {
@@ -28,7 +30,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 600;
                 decimal expectedDeduction = grossPay * 0.25M;
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new IrelandIncomeTaxDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -37,7 +43,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 800;
                 decimal expectedDeduction = (600 * 0.25M) + ((grossPay - 600) * 0.40M);
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new IrelandIncomeTaxDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -46,7 +56,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 500;
                 decimal expectedDeduction = (grossPay * 0.07M);
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new IrelandUniversalSocialChargeDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -55,7 +69,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 500;
                 decimal expectedDeduction = (500 * 0.07M) + ((grossPay - 500) * 0.08M);
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new IrelandUniversalSocialChargeDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -64,7 +82,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 900;
                 decimal expectedDeduction = (grossPay * 0.04M);
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new IrelandPensionDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -73,7 +95,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 600;
                 decimal expectedDeduction = grossPay * 0.25M;
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new ItalyIncomeTaxDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -82,7 +108,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 900;
                 decimal expectedDeduction = (grossPay * 0.0919M);
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new ItalySocialSecurityDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
             [TestMethod]
             public void GivenIncomeTaxInGermanyWhenGrossPayIs400DollarsThenDeductionShouldBe25Percent()
@@ -90,7 +120,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 400;
                 decimal expectedDeduction = grossPay * 0.25M;
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new GermanyIncomeTaxDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -99,7 +133,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 800;
                 decimal expectedDeduction = (400 * 0.25M) + ((grossPay - 400) * 0.32M);
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new GermanyIncomeTaxDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
 
             [TestMethod]
@@ -108,7 +146,11 @@ namespace Avenue.Payroll.Test
                 const int grossPay = 900;
                 decimal expectedDeduction = (grossPay * 0.02M);
 
-                Assert.Fail("Not implemented yet");
+                var deduction = new GermanyPensionDeduction();
+
+                deduction.CalculateDeduction(grossPay);
+
+                deduction.Amount.ShouldEqual(expectedDeduction);
             }
         }
     }

@@ -41,11 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Interfaces\IDeduction.cs" />
+    <Compile Include="Logic\GermanyPensionDeduction.cs" />
+    <Compile Include="Logic\GermanyIncomeTaxDeduction.cs" />
+    <Compile Include="Logic\IrelandPensionDeduction.cs" />
+    <Compile Include="Logic\IrelandUniversalSocialChargeDeduction.cs" />
+    <Compile Include="Logic\ItalyIncomeTaxDeduction.cs" />
+    <Compile Include="Logic\IrelandIncomeTaxDeduction.cs" />
+    <Compile Include="Logic\ItalySocialSecurityDeduction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Logic\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
