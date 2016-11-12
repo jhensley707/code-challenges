@@ -18,6 +18,17 @@ namespace Avenue.Payroll.Business.Logic
         /// <param name="grossPay">Gross pay amount earned</param>
         public void CalculateDeduction(decimal grossPay)
         {
+            var grossPayBase = 500M;
+            var grossPayBasePercentage = 0.07M;
+            var grossPayExcessPercentage = 0.08M;
+            if (grossPay > grossPayBase)
+            {
+                Amount = (grossPayBase * grossPayBasePercentage) + ((grossPay - grossPayBase) * grossPayExcessPercentage);
+            }
+            else
+            {
+                Amount = (grossPayBase * grossPayBasePercentage);
+            }
         }
     }
 }
