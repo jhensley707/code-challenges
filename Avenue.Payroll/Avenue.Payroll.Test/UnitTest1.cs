@@ -13,11 +13,15 @@ namespace Avenue.Payroll.Test
             [TestMethod]
             public void Given40HoursAnd10DollarsPerHourThenGrossPayShouldBe400Dollars()
             {
-                const int hoursWorked = 40;
-                const int payRatePerHour = 10;
-                const int expectedGrossPay = 400;
+                const decimal hoursWorked = 40M;
+                const decimal payRatePerHour = 10M;
+                const decimal expectedGrossPay = 400M;
 
-                Assert.Fail("Not implemented yet");
+                var grossPayCalculator = new GrossPayCalculator();
+
+                var grossPay = grossPayCalculator.CalculateGrossPay(hoursWorked, payRatePerHour);
+
+                grossPay.ShouldEqual(expectedGrossPay);
             }
         }
 

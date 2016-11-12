@@ -44,6 +44,8 @@
     <Compile Include="Interfaces\IDeduction.cs" />
     <Compile Include="Logic\GermanyPensionDeduction.cs" />
     <Compile Include="Logic\GermanyIncomeTaxDeduction.cs" />
+    <Compile Include="Logic\GrossPayCalculator.cs" />
+    <Compile Include="Interfaces\IGrossPayCalculator.cs" />
     <Compile Include="Logic\IrelandPensionDeduction.cs" />
     <Compile Include="Logic\IrelandUniversalSocialChargeDeduction.cs" />
     <Compile Include="Logic\ItalyIncomeTaxDeduction.cs" />
@@ -51,9 +53,7 @@
     <Compile Include="Logic\ItalySocialSecurityDeduction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
