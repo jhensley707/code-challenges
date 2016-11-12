@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Interfaces\IDeduction.cs" />
+    <Compile Include="Interfaces\INetPayCalculator.cs" />
+    <Compile Include="Interfaces\IPayRollHandler.cs" />
+    <Compile Include="Logic\EndOfChainPayRollHandler.cs" />
     <Compile Include="Logic\GermanyPensionDeduction.cs" />
     <Compile Include="Logic\GermanyIncomeTaxDeduction.cs" />
     <Compile Include="Logic\GrossPayCalculator.cs" />
@@ -51,6 +54,9 @@
     <Compile Include="Logic\ItalyIncomeTaxDeduction.cs" />
     <Compile Include="Logic\IrelandIncomeTaxDeduction.cs" />
     <Compile Include="Logic\ItalySocialSecurityDeduction.cs" />
+    <Compile Include="Logic\NetPayCalculator.cs" />
+    <Compile Include="Logic\NetPayResponse.cs" />
+    <Compile Include="Logic\PayRollHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
