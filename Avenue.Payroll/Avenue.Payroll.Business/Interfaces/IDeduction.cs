@@ -6,6 +6,11 @@
     public interface IDeduction
     {
         /// <summary>
+        /// The name of the deduction
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Amount of the deduction
         /// </summary>
         decimal Amount { get; }

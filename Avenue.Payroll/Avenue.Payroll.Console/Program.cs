@@ -74,7 +74,7 @@ namespace Avenue.Payroll.Console
                 System.Console.WriteLine();
                 foreach (var deduction in response.Deductions)
                 {
-                    System.Console.WriteLine("Deduction Name: ${0:F2}", deduction.Amount);
+                    System.Console.WriteLine("{0}: ${1:F2}", deduction.Name, deduction.Amount);
                 }
                 System.Console.WriteLine("Net amount: ${0:F2}", response.NetPay);
                 System.Console.WriteLine();

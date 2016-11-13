@@ -8,6 +8,11 @@ namespace Avenue.Payroll.Business.Logic
     public class ItalySocialSecurityDeduction : IDeduction
     {
         /// <summary>
+        /// The name of the deduction
+        /// </summary>
+        public string Name { get { return "Social Security"; } }
+
+        /// <summary>
         /// Amount of the deduction
         /// </summary>
         public decimal Amount { get; private set; }

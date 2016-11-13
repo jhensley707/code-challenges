@@ -8,6 +8,11 @@ namespace Avenue.Payroll.Business.Logic
     public class IrelandPensionDeduction : IDeduction
     {
         /// <summary>
+        /// The name of the deduction
+        /// </summary>
+        public string Name { get { return "Pension"; } }
+
+        /// <summary>
         /// Amount of the deduction
         /// </summary>
         public decimal Amount { get; private set; }
