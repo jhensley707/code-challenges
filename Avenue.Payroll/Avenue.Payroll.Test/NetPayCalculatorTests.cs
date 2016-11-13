@@ -36,12 +36,8 @@ namespace Avenue.Payroll.Test
                     .Returns(CalculatedGrossPay);
                 MockDeduction1 = new Mock<IDeduction>(MockBehavior.Strict);
                 MockDeduction1.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()));
-                MockDeduction1.SetupGet(p => p.Amount).Returns(Deduction1Amount);
-                MockDeduction1.SetupGet(p => p.Name).Returns(Deduction1Name);
                 MockDeduction2 = new Mock<IDeduction>(MockBehavior.Strict);
                 MockDeduction2.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()));
-                MockDeduction2.SetupGet(p => p.Amount).Returns(Deduction2Amount);
-                MockDeduction2.SetupGet(p => p.Name).Returns(Deduction2Name);
                 DeductionList = new List<IDeduction> { MockDeduction1.Object, MockDeduction2.Object };
             }
         }
@@ -120,12 +116,6 @@ namespace Avenue.Payroll.Test
             }
 
             [TestMethod]
-            public void ShouldGetAmountForFirstDeductionExactlyOnce()
-            {
-                MockDeduction1.Verify(p => p.Amount, Times.Exactly(1));
-            }
-
-            [TestMethod]
             public void ShouldCallCalculateDeductionForSecondDeductionExactlyOnce()
             {
                 MockDeduction2.Verify(m => m.CalculateDeduction(It.IsAny<decimal>()), Times.Exactly(1));
@@ -135,12 +125,6 @@ namespace Avenue.Payroll.Test
             public void ShouldCallCalculateDeductionForSecondDeductionWithGrossPay()
             {
                 MockDeduction2.Verify(m => m.CalculateDeduction(CalculatedGrossPay), Times.Exactly(1));
-            }
-
-            [TestMethod]
-            public void ShouldGetAmountForSecondDeductionExactlyOnce()
-            {
-                MockDeduction2.Verify(p => p.Amount, Times.Exactly(1));
             }
 
             [TestMethod]

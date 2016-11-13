@@ -13,7 +13,7 @@ namespace Avenue.Payroll.Business.Logic
     public class NetPayCalculator : INetPayCalculator
     {
         private IGrossPayCalculator _grossPayCalculator;
-        private List<IDeduction> _deductions;
+        private List<IDeduction> _deductionCalculators;
 
         /// <summary>
         /// Constructor validating and assigning repositories
@@ -33,7 +33,7 @@ namespace Avenue.Payroll.Business.Logic
             }
 
             _grossPayCalculator = grossPayCalculator;
-            _deductions = deductions;
+            _deductionCalculators = deductions;
         }
 
         /// <summary>
@@ -45,18 +45,17 @@ namespace Avenue.Payroll.Business.Logic
         /// <returns>Net pay calculation results</returns>
         public NetPayResponse CalculateNetPay(string locationName, decimal hoursWorked, decimal hourlyRate)
         {
-            var netPayResponse = new NetPayResponse { LocationName = locationName } ;
+            var netPayResponse = new NetPayResponse { LocationName = locationName, Deductions = new List<Deduction>() } ;
 
             netPayResponse.GrossPay = _grossPayCalculator.CalculateGrossPay(hoursWorked, hourlyRate);
             netPayResponse.NetPay = netPayResponse.GrossPay;
 
-            foreach(var deduction in _deductions)
+            foreach(var deductionCalculator in _deductionCalculators)
             {
-                deduction.CalculateDeduction(netPayResponse.GrossPay);
+                var deduction = deductionCalculator.CalculateDeduction(netPayResponse.GrossPay);
+                netPayResponse.Deductions.Add(deduction);
                 netPayResponse.NetPay -= deduction.Amount;
             }
-
-            netPayResponse.Deductions = _deductions;
 
             return netPayResponse;
         }

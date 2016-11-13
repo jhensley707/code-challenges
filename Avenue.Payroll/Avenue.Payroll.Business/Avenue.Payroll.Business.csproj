@@ -44,6 +44,7 @@
     <Compile Include="Interfaces\IDeduction.cs" />
     <Compile Include="Interfaces\INetPayCalculator.cs" />
     <Compile Include="Interfaces\IPayRollHandler.cs" />
+    <Compile Include="Logic\Deduction.cs" />
     <Compile Include="Logic\EndOfChainPayRollHandler.cs" />
     <Compile Include="Logic\GermanyPensionDeduction.cs" />
     <Compile Include="Logic\GermanyIncomeTaxDeduction.cs" />

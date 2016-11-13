@@ -7,33 +7,30 @@ namespace Avenue.Payroll.Business.Logic
     /// </summary>
     public class GermanyIncomeTaxDeduction : IDeduction
     {
-        /// <summary>
-        /// The name of the deduction
-        /// </summary>
-        public string Name { get { return "Income Tax"; } }
-
-        /// <summary>
-        /// Amount of the deduction
-        /// </summary>
-        public decimal Amount { get; private set; }
+        private const string _name = "Income Tax";
 
         /// <summary>
         /// Determines the deduction amount for the grossPay
         /// </summary>
         /// <param name="grossPay">Gross pay amount earned</param>
-        public void CalculateDeduction(decimal grossPay)
+        /// <returns>Deduction result</returns>
+        public Deduction CalculateDeduction(decimal grossPay)
         {
             var grossPayBase = 400M;
             var grossPayBasePercentage = 0.25M;
             var grossPayExcessPercentage = 0.32M;
+
+            var result = new Deduction { Name = _name };
             if (grossPay > grossPayBase)
             {
-                Amount = (grossPayBase * grossPayBasePercentage) + ((grossPay - grossPayBase) * grossPayExcessPercentage);
+                result.Amount = (grossPayBase * grossPayBasePercentage) + ((grossPay - grossPayBase) * grossPayExcessPercentage);
             }
             else
             {
-                Amount = (grossPayBase * grossPayBasePercentage);
+                result.Amount = (grossPayBase * grossPayBasePercentage);
             }
+
+            return result;
         }
     }
 }

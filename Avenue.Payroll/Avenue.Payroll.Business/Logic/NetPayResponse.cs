@@ -21,7 +21,7 @@ namespace Avenue.Payroll.Business.Logic
         /// <summary>
         /// Deductions of employee
         /// </summary>
-        public List<IDeduction> Deductions { get; set; }
+        public List<Deduction> Deductions { get; set; }
 
         /// <summary>
         /// Net pay of employee

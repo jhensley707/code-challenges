@@ -7,23 +7,19 @@ namespace Avenue.Payroll.Business.Logic
     /// </summary>
     public class ItalyIncomeTaxDeduction : IDeduction
     {
-        /// <summary>
-        /// The name of the deduction
-        /// </summary>
-        public string Name { get { return "Income Tax"; } }
-
-        /// <summary>
-        /// Amount of the deduction
-        /// </summary>
-        public decimal Amount { get; private set; }
+        private const string _name = "Income Tax";
 
         /// <summary>
         /// Determines the deduction amount for the grossPay
         /// </summary>
         /// <param name="grossPay">Gross pay amount earned</param>
-        public void CalculateDeduction(decimal grossPay)
+        /// <returns>Deduction result</returns>
+        public Deduction CalculateDeduction(decimal grossPay)
         {
-            Amount = grossPay * 0.25M;
+            var result = new Deduction { Name = _name };
+            result.Amount = grossPay * 0.25M;
+
+            return result;
         }
     }
 }
