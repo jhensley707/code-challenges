@@ -10,7 +10,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// Handler to process payroll based on location
     /// </summary>
-    public class PayRollHandler
+    public class PayRollHandler : IPayRollHandler
     {
         private string _locationName;
         private INetPayCalculator _netPayCalculator;
@@ -35,7 +35,7 @@ namespace Avenue.Payroll.Business.Logic
 
             _locationName = locationName;
             _netPayCalculator = netPayCalculator;
-            _next = new EndOfChainPayRollHandler();
+            _next = EndOfChainPayRollHandler.Instance;
         }
 
         /// <summary>

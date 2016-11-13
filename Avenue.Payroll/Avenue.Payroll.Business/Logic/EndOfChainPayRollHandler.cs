@@ -4,10 +4,17 @@ using System;
 namespace Avenue.Payroll.Business.Logic
 {
     /// <summary>
-    /// Class to handle unrecognized locationName
+    /// Singleton class to handle unrecognized locationName
     /// </summary>
     public class EndOfChainPayRollHandler : IPayRollHandler
     {
+        private static EndOfChainPayRollHandler _instance = new EndOfChainPayRollHandler();
+
+        /// <summary>
+        /// Singleton instance of handler
+        /// </summary>
+        public static EndOfChainPayRollHandler Instance { get { return _instance; } }
+
         /// <summary>
         /// Returns error response for unrecognized location
         /// </summary>
