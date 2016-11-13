@@ -28,6 +28,8 @@ namespace Avenue.Payroll.Test
             public Mock<IDeduction> MockDeduction2;
             public NetPayCalculator Calculator;
             public NetPayResponse IrelandResponse;
+            public Deduction Deduction1 = new Deduction { Name = Deduction1Name, Amount = Deduction1Amount };
+            public Deduction Deduction2 = new Deduction { Name = Deduction2Name, Amount = Deduction2Amount };
 
             public virtual void Initialize()
             {
@@ -35,9 +37,11 @@ namespace Avenue.Payroll.Test
                 MockGrossPayCalculator.Setup(m => m.CalculateGrossPay(It.IsAny<decimal>(), It.IsAny<decimal>()))
                     .Returns(CalculatedGrossPay);
                 MockDeduction1 = new Mock<IDeduction>(MockBehavior.Strict);
-                MockDeduction1.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()));
+                MockDeduction1.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()))
+                    .Returns(Deduction1);
                 MockDeduction2 = new Mock<IDeduction>(MockBehavior.Strict);
-                MockDeduction2.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()));
+                MockDeduction2.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()))
+                    .Returns(Deduction2);
                 DeductionList = new List<IDeduction> { MockDeduction1.Object, MockDeduction2.Object };
             }
         }

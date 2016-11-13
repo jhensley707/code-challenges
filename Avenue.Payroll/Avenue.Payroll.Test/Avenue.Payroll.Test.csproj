@@ -64,9 +64,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GermanyIncomeTaxDeductionTests.cs" />
+    <Compile Include="GermanyPensionDeductionTest.cs" />
+    <Compile Include="GrossPayCalculatorTests.cs" />
+    <Compile Include="IrelandIncomeTaxDeductionTests.cs" />
+    <Compile Include="IrelandPensionDeductionTests.cs" />
+    <Compile Include="IrelandUniversalSocialChargeDeductionTests.cs" />
+    <Compile Include="ItalyIncomeTaxDeductionTests.cs" />
     <Compile Include="NetPayCalculatorTests.cs" />
     <Compile Include="PayRollHandlerTests.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="ItalySocialSecurityDeductionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

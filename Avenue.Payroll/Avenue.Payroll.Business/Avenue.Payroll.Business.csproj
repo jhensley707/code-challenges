@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Interfaces\IDeduction.cs" />
     <Compile Include="Interfaces\INetPayCalculator.cs" />
     <Compile Include="Interfaces\IPayRollHandler.cs" />
