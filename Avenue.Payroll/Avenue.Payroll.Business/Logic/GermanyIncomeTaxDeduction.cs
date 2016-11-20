@@ -5,7 +5,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// An income tax deduction for Germany based on gross pay
     /// </summary>
-    public class GermanyIncomeTaxDeduction : IDeduction
+    public class GermanyIncomeTaxDeduction : IDeductionCalculator
     {
         private const string _name = "Income Tax";
 

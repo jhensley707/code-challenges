@@ -5,7 +5,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// A universal social charge deduction for Ireland based on gross pay
     /// </summary>
-    public class IrelandUniversalSocialChargeDeduction : IDeduction
+    public class IrelandUniversalSocialChargeDeduction : IDeductionCalculator
     {
         private const string _name = "Universal Social Charge";
 

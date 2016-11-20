@@ -13,14 +13,14 @@ namespace Avenue.Payroll.Business.Logic
     public class NetPayCalculator : INetPayCalculator
     {
         private IGrossPayCalculator _grossPayCalculator;
-        private List<IDeduction> _deductionCalculators;
+        private List<IDeductionCalculator> _deductionCalculators;
 
         /// <summary>
         /// Constructor validating and assigning repositories
         /// </summary>
         /// <param name="grossPayCalculator">Determines gross pay</param>
         /// <param name="deductions">Determines deduction amounts</param>
-        public NetPayCalculator(IGrossPayCalculator grossPayCalculator, List<IDeduction> deductions)
+        public NetPayCalculator(IGrossPayCalculator grossPayCalculator, List<IDeductionCalculator> deductions)
         {
             if (grossPayCalculator == null)
             {

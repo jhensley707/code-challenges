@@ -9,18 +9,18 @@ namespace Avenue.Payroll.Console
         static void Main(string[] args)
         {
             var grossPayCalculator = new GrossPayCalculator();
-            var irelandDeductions = new List<IDeduction>
+            var irelandDeductions = new List<IDeductionCalculator>
             {
                 new IrelandIncomeTaxDeduction(),
                 new IrelandUniversalSocialChargeDeduction(),
                 new IrelandPensionDeduction()
             };
-            var italyDeductions = new List<IDeduction>
+            var italyDeductions = new List<IDeductionCalculator>
             {
                 new ItalyIncomeTaxDeduction(),
                 new ItalySocialSecurityDeduction()
             };
-            var germanyDeductions = new List<IDeduction>
+            var germanyDeductions = new List<IDeductionCalculator>
             {
                 new GermanyIncomeTaxDeduction(),
                 new GermanyPensionDeduction()

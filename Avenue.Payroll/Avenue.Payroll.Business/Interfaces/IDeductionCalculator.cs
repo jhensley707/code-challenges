@@ -5,7 +5,7 @@ namespace Avenue.Payroll.Business.Interfaces
     /// <summary>
     /// A deduction based on gross pay
     /// </summary>
-    public interface IDeduction
+    public interface IDeductionCalculator
     {
         /// <summary>
         /// Determines the deduction amount for the grossPay

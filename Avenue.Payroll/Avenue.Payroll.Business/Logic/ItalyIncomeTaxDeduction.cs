@@ -5,7 +5,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// An income tax deduction for Italy based on gross pay
     /// </summary>
-    public class ItalyIncomeTaxDeduction : IDeduction
+    public class ItalyIncomeTaxDeduction : IDeductionCalculator
     {
         private const string _name = "Income Tax";
 

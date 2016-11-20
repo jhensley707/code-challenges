@@ -5,7 +5,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// A universal social charge deduction for Ireland based on gross pay
     /// </summary>
-    public class ItalySocialSecurityDeduction : IDeduction
+    public class ItalySocialSecurityDeduction : IDeductionCalculator
     {
         private const string _name = "Social Security";
 

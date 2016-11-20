@@ -5,7 +5,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// A pension deduction for Ireland based on gross pay
     /// </summary>
-    public class IrelandPensionDeduction : IDeduction
+    public class IrelandPensionDeduction : IDeductionCalculator
     {
         private const string _name = "Pension";
 

@@ -5,7 +5,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// An income tax deduction for Ireland based on gross pay
     /// </summary>
-    public class IrelandIncomeTaxDeduction : IDeduction
+    public class IrelandIncomeTaxDeduction : IDeductionCalculator
     {
         private const string _name = "Income Tax";
 

@@ -64,6 +64,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DeductionCalculatorTests.cs" />
     <Compile Include="GermanyIncomeTaxDeductionTests.cs" />
     <Compile Include="GermanyPensionDeductionTest.cs" />
     <Compile Include="GrossPayCalculatorTests.cs" />

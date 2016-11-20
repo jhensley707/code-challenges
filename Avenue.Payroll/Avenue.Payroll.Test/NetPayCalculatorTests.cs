@@ -23,9 +23,9 @@ namespace Avenue.Payroll.Test
             public const decimal CalculatedNetPay = 1850M;
 
             public Mock<IGrossPayCalculator> MockGrossPayCalculator;
-            public List<IDeduction> DeductionList;
-            public Mock<IDeduction> MockDeduction1;
-            public Mock<IDeduction> MockDeduction2;
+            public List<IDeductionCalculator> DeductionList;
+            public Mock<IDeductionCalculator> MockDeduction1;
+            public Mock<IDeductionCalculator> MockDeduction2;
             public NetPayCalculator Calculator;
             public NetPayResponse IrelandResponse;
             public Deduction Deduction1 = new Deduction { Name = Deduction1Name, Amount = Deduction1Amount };
@@ -36,13 +36,13 @@ namespace Avenue.Payroll.Test
                 MockGrossPayCalculator = new Mock<IGrossPayCalculator>(MockBehavior.Strict);
                 MockGrossPayCalculator.Setup(m => m.CalculateGrossPay(It.IsAny<decimal>(), It.IsAny<decimal>()))
                     .Returns(CalculatedGrossPay);
-                MockDeduction1 = new Mock<IDeduction>(MockBehavior.Strict);
+                MockDeduction1 = new Mock<IDeductionCalculator>(MockBehavior.Strict);
                 MockDeduction1.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()))
                     .Returns(Deduction1);
-                MockDeduction2 = new Mock<IDeduction>(MockBehavior.Strict);
+                MockDeduction2 = new Mock<IDeductionCalculator>(MockBehavior.Strict);
                 MockDeduction2.Setup(m => m.CalculateDeduction(It.IsAny<decimal>()))
                     .Returns(Deduction2);
-                DeductionList = new List<IDeduction> { MockDeduction1.Object, MockDeduction2.Object };
+                DeductionList = new List<IDeductionCalculator> { MockDeduction1.Object, MockDeduction2.Object };
             }
         }
 
