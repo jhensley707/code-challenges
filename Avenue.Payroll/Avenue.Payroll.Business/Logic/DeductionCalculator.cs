@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Avenue.Payroll.Business.Logic
 {
+    /// <summary>
+    /// Calculates deductions using the specified deduction rates
+    /// </summary>
     public class DeductionCalculator
     {
         private string _name;
@@ -39,11 +42,38 @@ namespace Avenue.Payroll.Business.Logic
         /// Calculates the deductions of the grossPay based on the specified
         /// DeductionRates
         /// </summary>
-        /// <param name="grossPay"></param>
-        /// <returns></returns>
+        /// <param name="grossPay">Gross pay amount earned</param>
+        /// <returns>Deduction result</returns>
         public Deduction CalculateDeduction(decimal grossPay)
         {
-            return new Deduction { Name = _name, Amount = grossPay };
+            var amount = 0M;
+            decimal? tierMinimum = null;
+            var grossPayTierAmount = grossPay;
+
+            foreach (var deductionRate in _deductionRates)
+            {
+                if (deductionRate.Limit.HasValue)
+                {
+                    if (grossPay <= deductionRate.Limit.Value)
+                    {
+                        grossPayTierAmount = grossPay - (tierMinimum ?? 0);
+                    }
+                    else
+                    {
+                        grossPayTierAmount = deductionRate.Limit.Value - (tierMinimum ?? 0);
+                    }
+
+                    tierMinimum = deductionRate.Limit;
+                }
+                else
+                {
+                    grossPayTierAmount = grossPay - (tierMinimum ?? 0);
+                }
+                
+                amount += grossPayTierAmount * (deductionRate.Rate ?? 0M);
+            }
+
+            return new Deduction { Name = _name, Amount = amount };
         }
     }
 }
