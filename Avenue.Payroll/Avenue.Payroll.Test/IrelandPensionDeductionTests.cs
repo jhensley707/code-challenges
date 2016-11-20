@@ -8,13 +8,13 @@ namespace Avenue.Payroll.Test
     [TestClass]
     public class IrelandPensionDeductionTests
     {
+        const int grossPay = 900;
         const string expectedName = "Pension";
+        private DeductionRate deductionRate1 = new DeductionRate(0.04M);
 
         [TestMethod]
         public void DeductionNameShouldBePension()
         {
-            const int grossPay = 900;
-            var deductionRate1 = new DeductionRate { Rate = 0.04M };
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1 });
 
@@ -26,8 +26,6 @@ namespace Avenue.Payroll.Test
         [TestMethod]
         public void GivenPensionInIrelandThenDeductionShouldBe4Percent()
         {
-            const int grossPay = 900;
-            var deductionRate1 = new DeductionRate { Rate = 0.04M };
             decimal expectedDeduction = (grossPay * 0.04M);
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1 });

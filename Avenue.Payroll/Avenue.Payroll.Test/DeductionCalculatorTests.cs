@@ -47,8 +47,8 @@ namespace Avenue.Payroll.Test
                 const string Name = "Income Tax";
                 var deductionRates = new List<DeductionRate>
                 {
-                    new DeductionRate { Rate = 0.075M },
-                    new DeductionRate { Rate = 0.1M }
+                    new DeductionRate(0.075M),
+                    new DeductionRate(0.1M)
                 };
 
                 var deductionCalculator = new DeductionCalculator(Name, deductionRates);

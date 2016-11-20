@@ -9,12 +9,12 @@ namespace Avenue.Payroll.Test
     public class ItalySocialSecurityDeductionTests
     {
         const string expectedName = "Social Security";
+        private DeductionRate deductionRate1 = new DeductionRate(0.0919M);
 
         [TestMethod]
         public void DeductionNameShouldBeSocialSecurity()
         {
             const int grossPay = 900;
-            var deductionRate1 = new DeductionRate { Rate = 0.0919M };
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1 });
 
@@ -27,7 +27,6 @@ namespace Avenue.Payroll.Test
         public void GivenSocialSecurityInItalyThenDeductionShouldBe9Point19Percent()
         {
             const int grossPay = 900;
-            var deductionRate1 = new DeductionRate { Rate = 0.0919M };
             decimal expectedDeduction = (grossPay * 0.0919M);
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1 });

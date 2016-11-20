@@ -1,9 +1,6 @@
 ﻿using Avenue.Payroll.Business.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Avenue.Payroll.Business.Logic
 {
@@ -12,44 +9,21 @@ namespace Avenue.Payroll.Business.Logic
     /// </summary>
     public class PayRollHandler : IPayRollHandler
     {
-        private string _locationName;
-        private INetPayCalculator _netPayCalculator;
-        private IPayRollHandler _next;
+        private Dictionary<string, INetPayCalculator> _netPayCalculators;
 
         /// <summary>
         /// Constructor validating and assigning repositories
         /// </summary>
         /// <param name="locationName">Location for calculation</param>
         /// <param name="netPayCalculator">Calculator of results</param>
-        public PayRollHandler(string locationName, INetPayCalculator netPayCalculator)
+        public PayRollHandler(Dictionary<string, INetPayCalculator> netPayCalculators)
         {
-            if (string.IsNullOrWhiteSpace(locationName))
+            if (netPayCalculators == null)
             {
-                throw new ArgumentException("Invalid location name", "locationName");
+                throw new ArgumentNullException("netPayCalculators");
             }
 
-            if (netPayCalculator == null)
-            {
-                throw new ArgumentNullException("netPayCalculator");
-            }
-
-            _locationName = locationName;
-            _netPayCalculator = netPayCalculator;
-            _next = EndOfChainPayRollHandler.Instance;
-        }
-
-        /// <summary>
-        /// Assigns next location-specific payroll handler
-        /// </summary>
-        /// <param name="nextHandler"></param>
-        public void RegisterNext(IPayRollHandler nextHandler)
-        {
-            if (nextHandler == null)
-            {
-                throw new ArgumentNullException("nextHandler");
-            }
-
-            _next = nextHandler;
+            _netPayCalculators = netPayCalculators;
         }
 
         /// <summary>
@@ -62,13 +36,13 @@ namespace Avenue.Payroll.Business.Logic
         /// <returns></returns>
         public NetPayResponse CalculateNetPay(string locationName, decimal hoursWorked, decimal hourlyRate)
         {
-            if (_locationName.Equals(locationName, StringComparison.CurrentCultureIgnoreCase))
+            if (_netPayCalculators.ContainsKey(locationName))
             {
-                return _netPayCalculator.CalculateNetPay(_locationName, hoursWorked, hourlyRate);
+                return _netPayCalculators[locationName].CalculateNetPay(locationName, hoursWorked, hourlyRate);
             }
             else
             {
-                return _next.CalculateNetPay(locationName, hoursWorked, hourlyRate);
+                return new NetPayResponse { ErrorMessage = string.Format("Location {0} is not supported", locationName) };
             }
         }
     }

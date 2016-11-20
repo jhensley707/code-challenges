@@ -4,6 +4,7 @@ using Moq;
 using Avenue.Payroll.Business.Interfaces;
 using Avenue.Payroll.Business.Logic;
 using Should;
+using System.Collections.Generic;
 
 namespace Avenue.Payroll.Test
 {
@@ -18,8 +19,9 @@ namespace Avenue.Payroll.Test
             public const decimal CalculatedGrossPay = 2000M;
             public const decimal CalculatedNetPay = 2000M;
             public Mock<INetPayCalculator> MockIrelandNetPayCalculator;
-            public Mock<IPayRollHandler> MockItalyPayRollHandler;
-            public IPayRollHandler IrelandHandler;
+            public Mock<INetPayCalculator> MockItalyNetPayCalculator;
+            public Dictionary<string, INetPayCalculator> NetPayCalculators;
+            public IPayRollHandler Handler;
             public NetPayResponse IrelandResponse;
             public NetPayResponse ItalyResponse;
 
@@ -39,11 +41,14 @@ namespace Avenue.Payroll.Test
                 };
 
                 MockIrelandNetPayCalculator = new Mock<INetPayCalculator>(MockBehavior.Strict);
-                MockItalyPayRollHandler = new Mock<IPayRollHandler>(MockBehavior.Strict);
                 MockIrelandNetPayCalculator.Setup(m => m.CalculateNetPay(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<decimal>()))
                     .Returns(IrelandResponse);
-                MockItalyPayRollHandler.Setup(m => m.CalculateNetPay(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<decimal>()))
+                MockItalyNetPayCalculator = new Mock<INetPayCalculator>(MockBehavior.Strict);
+                MockItalyNetPayCalculator.Setup(m => m.CalculateNetPay(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<decimal>()))
                     .Returns(ItalyResponse);
+                NetPayCalculators = new Dictionary<string, INetPayCalculator>();
+                NetPayCalculators.Add("Ireland", MockIrelandNetPayCalculator.Object);
+                NetPayCalculators.Add("Italy", MockItalyNetPayCalculator.Object);
             }
         }
 
@@ -56,44 +61,19 @@ namespace Avenue.Payroll.Test
                 base.Initialize();
             }
 
-            [ExpectedException(typeof(ArgumentException))]
-            [TestMethod]
-            public void ShouldThrowExceptionWithEmptyLocationName()
-            {
-                IrelandHandler = new PayRollHandler(string.Empty, MockIrelandNetPayCalculator.Object);
-            }
-
             [ExpectedException(typeof(ArgumentNullException))]
             [TestMethod]
-            public void ShouldThrowExceptionWithNullNetPayCalculator()
+            public void ShouldThrowExceptionWithNullNetPayCalculators()
             {
-                IrelandHandler = new PayRollHandler(IrelandLocationName, null);
+                Handler = new PayRollHandler(null);
             }
 
             [TestMethod]
             public void ShouldInstantiateWithAllRepositories()
             {
-                IrelandHandler = new PayRollHandler(IrelandLocationName, MockIrelandNetPayCalculator.Object);
+                Handler = new PayRollHandler(NetPayCalculators);
 
-                IrelandHandler.ShouldNotBeNull();
-            }
-        }
-
-        [TestClass]
-        public class RegisterNextMethod : PayRollHandlerTestBase
-        {
-            [TestInitialize]
-            public override void Initialize()
-            {
-                base.Initialize();
-                IrelandHandler = new PayRollHandler(IrelandLocationName, MockIrelandNetPayCalculator.Object);
-            }
-
-            [ExpectedException(typeof(ArgumentNullException))]
-            [TestMethod]
-            public void ShouldThrowExceptionWithNullPayRollHandler()
-            {
-                IrelandHandler.RegisterNext(null);
+                Handler.ShouldNotBeNull();
             }
         }
 
@@ -104,9 +84,8 @@ namespace Avenue.Payroll.Test
             public override void Initialize()
             {
                 base.Initialize();
-                IrelandHandler = new PayRollHandler(IrelandLocationName, MockIrelandNetPayCalculator.Object);
-                IrelandHandler.RegisterNext(MockItalyPayRollHandler.Object);
-                IrelandHandler.CalculateNetPay(IrelandLocationName, HoursWorked, HourlyRate);
+                Handler = new PayRollHandler(NetPayCalculators);
+                Handler.CalculateNetPay(IrelandLocationName, HoursWorked, HourlyRate);
             }
 
             [TestMethod]
@@ -141,9 +120,8 @@ namespace Avenue.Payroll.Test
             public override void Initialize()
             {
                 base.Initialize();
-                IrelandHandler = new PayRollHandler(IrelandLocationName, MockIrelandNetPayCalculator.Object);
-                IrelandHandler.RegisterNext(MockItalyPayRollHandler.Object);
-                IrelandHandler.CalculateNetPay(ItalyLocationName, HoursWorked, HourlyRate);
+                Handler = new PayRollHandler(NetPayCalculators);
+                Handler.CalculateNetPay(ItalyLocationName, HoursWorked, HourlyRate);
             }
 
             [TestMethod]
@@ -155,25 +133,25 @@ namespace Avenue.Payroll.Test
             [TestMethod]
             public void ShouldCallItalyPayRollHandlerExactlyOnce()
             {
-                MockItalyPayRollHandler.Verify(m => m.CalculateNetPay(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<decimal>()), Times.Exactly(1));
+                MockItalyNetPayCalculator.Verify(m => m.CalculateNetPay(It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<decimal>()), Times.Exactly(1));
             }
 
             [TestMethod]
             public void ShouldCallItalyPayRollHandlerWithLocationNameItaly()
             {
-                MockItalyPayRollHandler.Verify(m => m.CalculateNetPay(ItalyLocationName, It.IsAny<decimal>(), It.IsAny<decimal>()), Times.Exactly(1));
+                MockItalyNetPayCalculator.Verify(m => m.CalculateNetPay(ItalyLocationName, It.IsAny<decimal>(), It.IsAny<decimal>()), Times.Exactly(1));
             }
 
             [TestMethod]
             public void ShouldCallItalyPayRollHandlerWithHoursWorked()
             {
-                MockItalyPayRollHandler.Verify(m => m.CalculateNetPay(It.IsAny<string>(), HoursWorked, It.IsAny<decimal>()), Times.Exactly(1));
+                MockItalyNetPayCalculator.Verify(m => m.CalculateNetPay(It.IsAny<string>(), HoursWorked, It.IsAny<decimal>()), Times.Exactly(1));
             }
 
             [TestMethod]
             public void ShouldCallItalyPayRollHandlerWithHourlyRate()
             {
-                MockItalyPayRollHandler.Verify(m => m.CalculateNetPay(It.IsAny<string>(), It.IsAny<decimal>(), HourlyRate), Times.Exactly(1));
+                MockItalyNetPayCalculator.Verify(m => m.CalculateNetPay(It.IsAny<string>(), It.IsAny<decimal>(), HourlyRate), Times.Exactly(1));
             }
         }
     }

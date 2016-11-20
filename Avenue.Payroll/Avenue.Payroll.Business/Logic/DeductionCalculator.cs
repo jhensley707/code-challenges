@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avenue.Payroll.Business.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace Avenue.Payroll.Business.Logic
     /// <summary>
     /// Calculates deductions using the specified deduction rates
     /// </summary>
-    public class DeductionCalculator
+    public class DeductionCalculator : IDeductionCalculator
     {
         private string _name;
 
@@ -70,7 +71,12 @@ namespace Avenue.Payroll.Business.Logic
                     grossPayTierAmount = grossPay - (tierMinimum ?? 0);
                 }
                 
-                amount += grossPayTierAmount * (deductionRate.Rate ?? 0M);
+                amount += grossPayTierAmount * deductionRate.Rate;
+
+                if (grossPay <= (deductionRate.Limit ?? 0))
+                {
+                    break;
+                }
             }
 
             return new Deduction { Name = _name, Amount = amount };

@@ -9,12 +9,12 @@ namespace Avenue.Payroll.Test
     public class ItalyIncomeTaxDeductionTests
     {
         const string expectedName = "Income Tax";
+        private DeductionRate deductionRate1 = new DeductionRate(0.25M);
 
         [TestMethod]
         public void DeductionNameShouldBeIncomeTax()
         {
             const int grossPay = 600;
-            var deductionRate1 = new DeductionRate { Rate = 0.25M };
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1 });
 
@@ -27,7 +27,6 @@ namespace Avenue.Payroll.Test
         public void GivenIncomeTaxInItalyWhenGrossPayIs600DollarsThenDeductionShouldBe25Percent()
         {
             const int grossPay = 600;
-            var deductionRate1 = new DeductionRate { Rate = 0.25M };
             decimal expectedDeduction = grossPay * 0.25M;
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1 });

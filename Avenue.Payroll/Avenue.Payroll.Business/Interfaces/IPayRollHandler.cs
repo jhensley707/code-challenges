@@ -15,11 +15,5 @@ namespace Avenue.Payroll.Business.Interfaces
         /// <param name="hourlyRate">Rate of pay for employee</param>
         /// <returns>Net pay calculation results</returns>
         NetPayResponse CalculateNetPay(string locationName, decimal hoursWorked, decimal hourlyRate);
-
-        /// <summary>
-        /// Assigns next location-specific payroll handler
-        /// </summary>
-        /// <param name="nextHandler"></param>
-        void RegisterNext(IPayRollHandler nextHandler);
     }
 }

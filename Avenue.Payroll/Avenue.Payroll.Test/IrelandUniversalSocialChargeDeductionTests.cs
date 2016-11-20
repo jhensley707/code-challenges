@@ -9,13 +9,13 @@ namespace Avenue.Payroll.Test
     public class IrelandUniversalSocialChargeDeductionTests
     {
         const string expectedName = "Universal Social Charge";
+        private DeductionRate deductionRate1 = new DeductionRate(0.07M, 500M);
+        private DeductionRate deductionRate2 = new DeductionRate(0.08M);
 
         [TestMethod]
         public void DeductionNameShouldBePension()
         {
             const int grossPay = 500;
-            var deductionRate1 = new DeductionRate { Limit = 500, Rate = 0.07M };
-            var deductionRate2 = new DeductionRate { Rate = 0.08M };
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1, deductionRate2 });
 
@@ -25,11 +25,9 @@ namespace Avenue.Payroll.Test
         }
 
         [TestMethod]
-        public void GivenSocialChargeInIrelandWhenGrossPayIs500DollarsThenDeductionShouldBe7Percent()
+        public void GivenSocialChargeInIrelandWhenGrossPayIs200DollarsThenDeductionShouldBe7Percent()
         {
-            const int grossPay = 500;
-            var deductionRate1 = new DeductionRate { Limit = 500, Rate = 0.07M };
-            var deductionRate2 = new DeductionRate { Rate = 0.08M };
+            const int grossPay = 200;
             decimal expectedDeduction = (grossPay * 0.07M);
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1, deductionRate2 });
@@ -42,9 +40,7 @@ namespace Avenue.Payroll.Test
         [TestMethod]
         public void GivenSocialChargeInIrelandWhenGrossPayIs800DollarsThenDeductionShouldBe8PercentOnAmountOver500()
         {
-            const int grossPay = 500;
-            var deductionRate1 = new DeductionRate { Limit = 500M, Rate = 0.07M };
-            var deductionRate2 = new DeductionRate { Rate = 0.08M };
+            const int grossPay = 800;
             decimal expectedDeduction = (500 * 0.07M) + ((grossPay - 500) * 0.08M);
 
             var deductionCalculator = new DeductionCalculator(expectedName, new List<DeductionRate> { deductionRate1, deductionRate2 });

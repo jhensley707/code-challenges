@@ -11,26 +11,29 @@ namespace Avenue.Payroll.Console
             var grossPayCalculator = new GrossPayCalculator();
             var irelandDeductions = new List<IDeductionCalculator>
             {
-                new IrelandIncomeTaxDeduction(),
-                new IrelandUniversalSocialChargeDeduction(),
-                new IrelandPensionDeduction()
+                new DeductionCalculator("Income Tax", new List<DeductionRate>
+                    { new DeductionRate(0.25M, 600M), new DeductionRate(0.40M) }),
+                new DeductionCalculator("Universal Social Charge", new List<DeductionRate>
+                    { new DeductionRate(0.07M, 500), new DeductionRate(0.08M) }),
+                new DeductionCalculator("Pension", new List<DeductionRate> { new DeductionRate(0.04M) }),
             };
             var italyDeductions = new List<IDeductionCalculator>
             {
-                new ItalyIncomeTaxDeduction(),
-                new ItalySocialSecurityDeduction()
+                new DeductionCalculator("Income Tax", new List<DeductionRate> { new DeductionRate(0.25M) }),
+                new DeductionCalculator("Social Security", new List<DeductionRate> { new DeductionRate(0.0919M) }),
             };
             var germanyDeductions = new List<IDeductionCalculator>
             {
-                new GermanyIncomeTaxDeduction(),
-                new GermanyPensionDeduction()
+                new DeductionCalculator("Income Tax", new List<DeductionRate>
+                    { new DeductionRate(0.25M, 400M), new DeductionRate(0.32M) }),
+                new DeductionCalculator("Pension", new List<DeductionRate> { new DeductionRate(0.02M) }),
             };
-            var irelandHandler = new PayRollHandler("Ireland", new NetPayCalculator(grossPayCalculator, irelandDeductions));
-            var italyHandler = new PayRollHandler("Italy", new NetPayCalculator(grossPayCalculator, italyDeductions));
-            var germanyHandler = new PayRollHandler("Germany", new NetPayCalculator(grossPayCalculator, germanyDeductions));
+            var netPayCalculators = new Dictionary<string, INetPayCalculator>();
+            netPayCalculators.Add("Ireland", new NetPayCalculator(grossPayCalculator, irelandDeductions));
+            netPayCalculators.Add("Italy", new NetPayCalculator(grossPayCalculator, italyDeductions));
+            netPayCalculators.Add("Germany", new NetPayCalculator(grossPayCalculator, germanyDeductions));
 
-            irelandHandler.RegisterNext(italyHandler);
-            italyHandler.RegisterNext(germanyHandler);
+            var payRollHandler = new PayRollHandler(netPayCalculators);
 
             decimal hoursWorked;
             decimal hourlyRate;
@@ -51,7 +54,7 @@ namespace Avenue.Payroll.Console
                 }
 
                 // Calculate the Net pay
-                var response = irelandHandler.CalculateNetPay(location, hoursWorked, hourlyRate);
+                var response = payRollHandler.CalculateNetPay(location, hoursWorked, hourlyRate);
 
                 if (response == null)
                 {
