@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avenue.Payroll.Console", "Avenue.Payroll.Console\Avenue.Payroll.Console.csproj", "{0B031B69-F7C0-4C5D-BF19-15E819CE261C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avenue.Payroll.Business", "Avenue.Payroll.Business\Avenue.Payroll.Business.csproj", "{53AA6990-D3B4-470B-800B-BF5F4582B7C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avenue.Payroll.Test", "Avenue.Payroll.Test\Avenue.Payroll.Test.csproj", "{4F0CA879-A5C1-4EDB-A54A-344BCFE50B51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC7E9F81-C912-45DA-BA83-4C318F5EB6C5}"
+	ProjectSection(SolutionItems) = preProject
+		AvenueCode DotNet Coding Challenge.pdf = AvenueCode DotNet Coding Challenge.pdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
