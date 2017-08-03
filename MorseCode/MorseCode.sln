@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingTest", "ProgrammingTest\ProgrammingTest.csproj", "{562869F6-C1B0-4178-8324-A2612A52A565}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2668D831-A0A8-489F-8E00-1F93B23F77CB}"
+	ProjectSection(SolutionItems) = preProject
+		Morse Code.PNG = Morse Code.PNG
+		Morse Code2.PNG = Morse Code2.PNG
+		Requirements.txt = Requirements.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseParserTests", "MorseParserTests\MorseParserTests.csproj", "{4924FE03-F7DE-4AD5-9442-495FBF7EF427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseParserConsole", "MorseParserConsole\MorseParserConsole.csproj", "{12E9D006-3992-49B5-9C81-CA6E1107647C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{562869F6-C1B0-4178-8324-A2612A52A565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562869F6-C1B0-4178-8324-A2612A52A565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562869F6-C1B0-4178-8324-A2612A52A565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562869F6-C1B0-4178-8324-A2612A52A565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4924FE03-F7DE-4AD5-9442-495FBF7EF427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4924FE03-F7DE-4AD5-9442-495FBF7EF427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4924FE03-F7DE-4AD5-9442-495FBF7EF427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4924FE03-F7DE-4AD5-9442-495FBF7EF427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E9D006-3992-49B5-9C81-CA6E1107647C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E9D006-3992-49B5-9C81-CA6E1107647C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E9D006-3992-49B5-9C81-CA6E1107647C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E9D006-3992-49B5-9C81-CA6E1107647C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
