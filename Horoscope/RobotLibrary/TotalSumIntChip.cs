@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RobotLibrary
 {
+    /// <summary>
+    /// Sums the total of integers in an array
+    /// </summary>
     public class TotalSumIntChip : IChip
     {
         public object Execute(object[] input, bool sortAscending = true)

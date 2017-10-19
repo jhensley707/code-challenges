@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RobotLibrary
 {
+    /// <summary>
+    /// Sorts an int array with option for ascending or descending
+    /// </summary>
     public class SortIntChip : IChip
     {
         public object Execute(object[] input, bool sortAscending = true)

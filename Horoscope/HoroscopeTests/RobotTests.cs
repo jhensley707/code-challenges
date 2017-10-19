@@ -9,47 +9,62 @@ namespace RobotTests
     [TestClass]
     public class RobotTests
     {
-        private Mock<IChip> MockChip;
+        private Robot _robot;
+        private Mock<IChip> _mockChip;
         private const int TotalSumChipOutput = 11;
-        private object[] input = new object[] { 1, 2, 3, 5 };
+        private object[] _input = new object[] { 1, 2, 3, 5 };
 
         [TestInitialize]
         public void Setup()
         {
-            MockChip = new Mock<IChip>(MockBehavior.Strict);
-            MockChip.Setup(m => m.Execute(input, It.IsAny<bool>())).Returns(TotalSumChipOutput);
-        }
+            _robot = Robot.Instance;
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorShouldValidateChip()
-        {
-            var robot = new Robot(null);
+            _mockChip = new Mock<IChip>(MockBehavior.Strict);
+            _mockChip.Setup(m => m.Execute(_input, It.IsAny<bool>())).Returns(TotalSumChipOutput);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void InstallChipShouldValidateChip()
         {
-            var robot = new Robot(null);
+            _robot.InstallChip(null);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ExecuteThrowsExceptionWithNoChip()
+        {
+            _robot.Execute(_input);
+        }
+
+        /// <summary>
+        /// Due to the Singleton nature of the Robot, this test
+        /// can't be run with the TotalChipsInstalled property
+        /// or it will be considered another unique chip
+        /// </summary>
+        [Ignore]
         [TestMethod]
         public void ExecuteInvokesChipWithInputExactlyOnce()
         {
-            var robot = new Robot(MockChip.Object);
+            _robot.InstallChip(_mockChip.Object);
 
-            var result = robot.Execute(input);
+            var result = _robot.Execute(_input);
 
-            MockChip.Verify(m => m.Execute(input, It.IsAny<bool>()), Times.Once());
+            _mockChip.Verify(m => m.Execute(_input, It.IsAny<bool>()), Times.Once());
         }
 
+        /// <summary>
+        /// Due to the Singleton nature of the Robot, this test
+        /// can't be run with the TotalChipsInstalled property
+        /// or it will be considered another unique chip
+        /// </summary>
+        [Ignore]
         [TestMethod]
         public void ExecuteReturnsChipOutput()
         {
-            var robot = new Robot(MockChip.Object);
+            _robot.InstallChip(_mockChip.Object);
 
-            var result = robot.Execute(input);
+            var result = _robot.Execute(_input);
 
             Assert.AreEqual(TotalSumChipOutput, result);
         }
@@ -57,11 +72,11 @@ namespace RobotTests
         [TestMethod]
         public void ReturnsUniqueChipCount()
         {
-            var robot = new Robot(new TotalSumIntChip());
-            robot.InstallChip(new SortIntChip());
-            robot.InstallChip(new TotalSumIntChip());
+            _robot.InstallChip(new TotalSumIntChip());
+            _robot.InstallChip(new SortIntChip());
+            _robot.InstallChip(new TotalSumIntChip());
 
-            Assert.AreEqual(robot.TotalChipsInstalled, 2);
+            Assert.AreEqual(2, _robot.TotalChipsInstalled);
         }
 
         [TestMethod]
@@ -69,7 +84,7 @@ namespace RobotTests
         {
             var totalSumChip = new TotalSumIntChip();
 
-            var result = totalSumChip.Execute(input);
+            var result = totalSumChip.Execute(_input);
 
             Assert.AreEqual(TotalSumChipOutput, result);
         }
@@ -79,7 +94,7 @@ namespace RobotTests
         {
             var sortIntChip = new SortIntChip();
 
-            var result = sortIntChip.Execute(input, false);
+            var result = sortIntChip.Execute(_input, false);
 
             Assert.AreEqual(5, ((int[])result)[0]);
         }

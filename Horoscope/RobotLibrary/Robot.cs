@@ -6,28 +6,79 @@ using System.Threading.Tasks;
 
 namespace RobotLibrary
 {
-    public class Robot : IRobot
+    /// <summary>
+    /// An extensible tool to perform operations on arrays based on installed chips
+    /// </summary>
+    public class Robot
     {
-        private List<Type> _installedChips = new List<Type>();
+        #region Singleton Instance
 
-        private IChip _chip;
+        private static Robot _instance;
 
-        public Robot(IChip chip)
+        /// <summary>
+        /// Private constructor enforces singleton
+        /// </summary>
+        private Robot()
         {
-            
-            InstallChip(chip);
+            _installedChips = new List<Type>();
         }
 
+        /// <summary>
+        /// Singleton instance
+        /// </summary>
+        public static Robot Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Robot();
+                }
+
+                return _instance;
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// List to collect unique types of installed chips
+        /// </summary>
+        private List<Type> _installedChips;
+
+        /// <summary>
+        /// The currently installed chip
+        /// </summary>
+        private IChip _chip;
+
+        /// <summary>
+        /// Returns total count of unique chips installed
+        /// </summary>
         public int TotalChipsInstalled
         {
             get { return _installedChips.Count; }
         }
 
+        /// <summary>
+        /// Accepts an input array and processes results with installed chip.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public object Execute(object[] input)
         {
+            if (_chip == null)
+            {
+                throw new InvalidOperationException("Chip is required");
+            }
+
             return _chip.Execute(input);
         }
 
+        /// <summary>
+        /// Installs chip into robot. Adds unique chip types to internal
+        /// list for chip type count history.
+        /// </summary>
+        /// <param name="chip"></param>
         public void InstallChip(IChip chip)
         {
             if (chip == null)
