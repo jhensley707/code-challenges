@@ -1,0 +1,36 @@
+﻿@model WebApplication.Models.PropertyViewModels
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Address</th>
+                <th>Year Built</th>
+                <th>List Price</th>
+                <th>Monthly Rent</th>
+                <th>Gross Yield %</th>
+            </tr>
+            @foreach (var propertyViewModel in Model.Properties)
+            {
+                <tr>
+                    <td>@propertyViewModel.Address</td>
+                    <td>@propertyViewModel.YearBuilt</td>
+                    <td>@propertyViewModel.ListPrice</td>
+                    <td>@propertyViewModel.MonthlyRent</td>
+                    <td>@propertyViewModel.GrossYield</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
