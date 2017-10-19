@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecretLibrary", "SecretLibrary\SecretLibrary.csproj", "{47BC77D7-3CF9-42A2-966D-184E106C2B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneLoginUnitTests", "OneLoginUnitTests\OneLoginUnitTests.csproj", "{A2E05185-07F3-4712-B291-054039F196C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47BC77D7-3CF9-42A2-966D-184E106C2B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47BC77D7-3CF9-42A2-966D-184E106C2B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47BC77D7-3CF9-42A2-966D-184E106C2B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47BC77D7-3CF9-42A2-966D-184E106C2B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E05185-07F3-4712-B291-054039F196C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2E05185-07F3-4712-B291-054039F196C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2E05185-07F3-4712-B291-054039F196C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2E05185-07F3-4712-B291-054039F196C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5210F249-FA77-47D2-9C1F-F183D1A753A3}
+	EndGlobalSection
+EndGlobal
