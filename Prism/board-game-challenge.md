@@ -10,9 +10,9 @@ Develop a game engine using these conditions:
 
 | a | b | c | d | e | f | g |
 ---|---|---|---|---|---|---
-| | | | | | | |
-| |X|O| | | | |
-| |X| |O| | | |
+|  :white_large_square: |  :white_large_square: |  :white_large_square: |  :white_large_square: |  :white_large_square: |  :white_large_square: |  :white_large_square: |
+|  :white_large_square: | :x: | :o:|:white_large_square:|:white_large_square:|:white_large_square:| :white_large_square:|
+| |:x:| |:o:| | | |
 | |X| | |O| | |
 | |X| | | |O| |
 | |X| | | | | |
