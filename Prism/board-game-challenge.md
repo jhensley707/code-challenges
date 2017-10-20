@@ -8,20 +8,14 @@ Develop a game engine using these conditions:
 * 2 players represented by Xs and Os
 * Players move in alternating turns
 
-\-------
--XO----
--X-O---
--X--O--
--X---O-
--X-----
-
- a | b | c | d | e | f | g
+| a | b | c | d | e | f | g |
 ---|---|---|---|---|---|---
- |X|O| | | | 
- |X| |O| | | 
- |X| | |O| | 
- |X| | | |O| 
- |X| | | | | 
+| | | | | | | |
+| |X|O| | | | |
+| |X| |O| | | |
+| |X| | |O| | |
+| |X| | | |O| |
+| |X| | | | | |
 
 Given the coordinates(x, y) of the last move, determine if the last move was a winning move
 
