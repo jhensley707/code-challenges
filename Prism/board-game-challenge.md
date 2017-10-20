@@ -15,6 +15,7 @@ Develop a game engine using these conditions:
 -X---O-
 -X-----
 
+ a | b | c | d | e | f | g
 ---|---|---|---|---|---|---
  |X|O| | | | 
  |X| |O| | | 
